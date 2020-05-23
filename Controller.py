@@ -40,7 +40,7 @@ with open('data.json') as json_file:
 api_key = data.get("api_key")
     
 # Function to Check PIN
-def printKey(key):
+def check_code(key):
     global seq
     # To open lock with RFID press * button and then use RFID tag
     if (key =="*"):
@@ -92,9 +92,11 @@ lcd.cursor_position(0,2)
 while True:
      
     keys = keypad.pressed_keys
+    # check to see if mailbox door is opened without code 
     if (switch.value == 0):
         actions.run_alarm(lcd, red_light, api_key)
+    # wait for key press
     if keys:
         print("Pressed: ", keys[0])
-        printKey(keys[0])
+        check_code(keys[0])
     time.sleep(0.2)

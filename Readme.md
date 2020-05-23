@@ -94,6 +94,20 @@ Pin Config:
 | 15| Red   | 5V | A |
 | 16| Black | GND | K |
 
+## Components
+
+- controller.py - Main file which reads keypad entry and checks the codes entered and controls response
+- initate.py - Gets the electronic components ready
+- actions.py - Performs actions according to code entered either accepting code (which unlocks door), denying code (sends message to display or raises alarm (send alarm message)
+- lock.py - open and shuts lock when called code is accepted
+- validations.py - compares PIN Code or RFID Tag id entered against the stored known codes
+- message.py - trigers IFTTT event, which sends notification to phone via Line app
+- data.json (no in repo) - PIN codes for parcel delivery, RFID Id's and IFTTT Api key
+
+## Program Flow
+
+
+
 ## References
 
 1. https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/overview
