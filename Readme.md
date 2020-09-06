@@ -2,7 +2,7 @@
 
 ## Overview
 
-
+Software code to run Protecta Mailbox.
 
 ## Pre-requisites
 
@@ -101,12 +101,8 @@ Pin Config:
 - actions.py - Performs actions according to code entered either accepting code (which unlocks door), denying code (sends message to display or raises alarm (send alarm message)
 - lock.py - open and shuts lock when called code is accepted
 - validations.py - compares PIN Code or RFID Tag id entered against the stored known codes
-- message.py - trigers IFTTT event, which sends notification to phone via Line app
-- data.json (no in repo) - PIN codes for parcel delivery, RFID Id's and IFTTT Api key
-
-## Program Flow
-
-
+- message.py - trigers Push Safer event, which sends notification to phone app
+- data.json (no in repo) - PIN codes for parcel delivery, RFID Id's and Push Safer Private Key
 
 ## References
 
@@ -114,3 +110,4 @@ Pin Config:
 1. LCD Controller - https://github.com/adafruit/Adafruit_CircuitPython_CharLCD
 1. Matrix Keypad - https://github.com/adafruit/Adafruit_CircuitPython_MatrixKeypad
 1. RFID - https://pimylifeup.com/raspberry-pi-rfid-rc522/
+1. Notifcation service - www.pushsafer.com
