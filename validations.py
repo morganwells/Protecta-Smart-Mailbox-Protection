@@ -6,8 +6,9 @@ def check_pin(pin_entered, data):
     parcels = data.get("parcels")
     for parcel in parcels:
         if parcel.get("pin") == pinstr:
+            parcelname = parcel.get("item")
             pinokflag = True
-    return pinokflag
+    return pinokflag, parcelname
 
 def check_tagid(tagid_entered, data):
     tagokflag = False

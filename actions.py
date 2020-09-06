@@ -4,11 +4,11 @@ import lock
 import time    
 import message
 
-def code_accepted(lcd, red_light, blue_light, switch, relay):
+def code_accepted(lcd, red_light, blue_light, yellow_light, switch, relay, api_key, parcelname):
     print("Code Accepted")
+    parcel_notify(parcelname, api_key)
+    
     print("Switch Value", switch.value)
-    lcd.clear()
-    lcd.home()
     lock.open_lock(blue_light, relay)
     red_light.off()
     blue_light.on()
@@ -19,18 +19,20 @@ def code_accepted(lcd, red_light, blue_light, switch, relay):
         time.sleep(0.5)
     # wait for the person to open door after unlocking it    
     switch.wait_for_release()
+    yellow_light.on()
     print("Door Open")
     lcd.message = "Door Open"
     # Now they have opened door, wait for them to close it, then lock it
     while (switch.value == 0):
         time.sleep(0.2)
     lock.close_lock(blue_light, relay)
+    yellow_light.off()
     red_light.on()
     print("Door Closed")
     lcd.message = "Door Closed"
-    time.sleep(1)
+    time.sleep(2)
     # Reset disply to start position
-    lcd.clear()
+    print("Reset LCD after close")
     lcd.message = "Enter PIN:"
     lcd.cursor = True
     lcd.cursor_position(0,2)
@@ -53,6 +55,7 @@ def code_denied(lcd, red_light):
         red_light.off()
         time.sleep(0.5)
     # Reset disply to start position
+    print("Reset LCD after deny")
     lcd.message = "Enter PIN:"
     lcd.cursor = True
     lcd.cursor_position(0,2)
@@ -68,10 +71,19 @@ def run_alarm(lcd, red_light, api_key):
     lcd.cursor = False
     # Flash denied message and red light
     red_light.blink()
-    message.send_message("mailbox_alarm","Alarm One","Alarm Two","Alarm Three",api_key)
+    message.send_message(api_key,"Your mailbox alarm was triggered","Protecta Alarm")
     for i in range(4):
         lcd.home()
         lcd.message = "Alarm! Alarm!\nPolice Called"
         time.sleep(0.5)
         lcd.clear()
         time.sleep(0.5)
+        
+def parcel_notify(item, api_key):
+    print("Sending Parcel Notification")
+    mes_text = "You just recieved a parcel from " + item
+    message.send_message(api_key,mes_text,"Protecta Recieved Parcel")
+    
+def letter_notify(api_key):
+    print("Sending Letter Notificaiton")
+    message.send_message(api_key,"You just recieved a letter","Protecta Recieved Letter")

@@ -1,19 +1,21 @@
+#!/usr/bin/env python3
+
 import digitalio
 import board
 import busio
 import adafruit_matrixkeypad
 import adafruit_character_lcd.character_lcd as characterlcd
-from mfrc522 import SimpleMFRC522
 from gpiozero import LED,OutputDevice, Button
 
 def devices():
 
     # Initate devices
-    blue_light = LED(26)
-    red_light = LED (19)
+    yellow_light = LED(2)
+    blue_light = LED(19)
+    red_light = LED (26)
     switch = Button(pin = 13)
-    reader = SimpleMFRC522()
     relay = OutputDevice(18)
+    letter_switch = Button(3)
 
 
     # Initate Key Pad
@@ -38,4 +40,4 @@ def devices():
         lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows
     )
 
-    return keypad, switch, lcd, blue_light, red_light, relay, reader
+    return keypad, switch, lcd, blue_light, red_light, yellow_light, relay, letter_switch
