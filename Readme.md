@@ -1,4 +1,4 @@
-# Protecta Smart Mailbox Protection
+# Protecta: Smart Mailbox Protection
 
 ## Overview
 
